@@ -1,0 +1,41 @@
+# ========================================
+# Phase 1: Foundation (Core LLM APIs)
+# ========================================
+openai>=1.0.0
+anthropic>=0.18.0
+google-genai>=1.0.0
+
+# LLM Frameworks
+pydantic-ai==1.52.0
+langchain>=1.2.0
+langchain-google-genai>=4.2.0
+langchain-openai>=0.1.0
+langchain-anthropic>=0.1.0
+langchain-community>=0.3.0
+
+# ========================================
+# Phase 2: RAG & Vector Databases
+# ========================================
+chromadb>=0.4.0
+sentence-transformers>=2.0.0
+pypdf>=3.0.0
+
+# ========================================
+# Phase 3: Production & Deployment
+# ========================================
+fastapi>=0.100.0
+uvicorn>=0.23.0
+gradio>=4.0.0
+
+# ========================================
+# Phase 4: Advanced (Optional)
+# ========================================
+# Fine-tuning and advanced features
+# transformers>=4.30.0
+# datasets>=2.14.0
+# accelerate>=0.20.0
+
+# ========================================
+# Utilities
+# ========================================
+python-dotenv>=1.0.0
