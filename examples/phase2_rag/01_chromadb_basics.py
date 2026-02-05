@@ -25,7 +25,6 @@ import os
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-from langchain.chains import RetrievalQA
 from langchain_core.documents import Document
 
 
@@ -122,8 +121,8 @@ def similarity_search_with_scores(vectorstore):
 
 def rag_qa_example(vectorstore):
     """
-    Full RAG Q&A example.
-    Combines retrieval with LLM generation.
+    Full RAG Q&A example using direct retriever + LLM approach.
+    Combines retrieval with LLM generation (Python 3.14 compatible).
     """
     print("=== RAG Q&A Example ===")
     
@@ -134,13 +133,8 @@ def rag_qa_example(vectorstore):
         temperature=0.3  # Lower temperature for factual answers
     )
     
-    # Create retrieval QA chain
-    qa_chain = RetrievalQA.from_chain_type(
-        llm=llm,
-        chain_type="stuff",  # "stuff" puts all docs in context
-        retriever=vectorstore.as_retriever(search_kwargs={"k": 2}),
-        return_source_documents=True
-    )
+    # Create retriever
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
     
     # Ask questions
     questions = [
@@ -151,9 +145,30 @@ def rag_qa_example(vectorstore):
     
     for question in questions:
         print(f"\nQuestion: {question}")
-        result = qa_chain.invoke({"query": question})
-        print(f"Answer: {result['result']}")
-        print(f"Sources: {[doc.metadata['source'] for doc in result['source_documents']]}")
+        
+        # Retrieve relevant documents
+        docs = retriever.invoke(question)
+        
+        # Format context from retrieved documents
+        context = "\n\n".join([doc.page_content for doc in docs])
+        
+        # Create prompt with context
+        prompt = f"""Answer the question based on the following context:
+
+Context:
+{context}
+
+Question: {question}
+
+Answer:"""
+        
+        # Get answer from LLM
+        response = llm.invoke(prompt)
+        print(f"Answer: {response.content}")
+        
+        # Print sources
+        sources = [doc.metadata['source'] for doc in docs]
+        print(f"Sources: {sources}")
 
 
 def custom_prompt_rag(vectorstore):
