@@ -82,8 +82,8 @@ def streaming_example():
     
     print("Streaming response: ", end="")
     for chunk in stream:
-        if hasattr(chunk, 'output_text_delta') and chunk.output_text_delta:
-            print(chunk.output_text_delta, end="", flush=True)
+        if getattr(chunk, 'type', None) == 'response.output_text.delta' and hasattr(chunk, 'delta'):
+            print(chunk.delta, end="", flush=True)
     print()  # New line
 
 
