@@ -22,7 +22,7 @@ langchain-text-splitters>=0.3.0
 cohere>=5.0.0
 
 # Vector Databases
-chromadb>=0.4.0
+chromadb>=1.4.1
 sentence-transformers>=2.0.0
 pypdf>=3.0.0
 pinecone-client>=3.0.0
