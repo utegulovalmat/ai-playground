@@ -195,22 +195,22 @@ if __name__ == "__main__":
     
     # Run all examples
     try:
-        simple_example()
-        print("\n" + "=" * 70 + "\n")
+        # simple_example()
+        # print("\n" + "=" * 70 + "\n")
         
-        detailed_instructions_example()
-        print("\n" + "=" * 70 + "\n")
+        # detailed_instructions_example()
+        # print("\n" + "=" * 70 + "\n")
         
         streaming_example()
         print("\n" + "=" * 70 + "\n")
         
-        temperature_example()
-        print("\n" + "=" * 70 + "\n")
+        # temperature_example()
+        # print("\n" + "=" * 70 + "\n")
         
-        multi_turn_conversation()
-        print("\n" + "=" * 70 + "\n")
+        # multi_turn_conversation()
+        # print("\n" + "=" * 70 + "\n")
         
-        api_overview()
+        # api_overview()
         
         print("\n" + "=" * 70)
         print("✓ All examples completed!")

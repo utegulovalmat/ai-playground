@@ -44,13 +44,19 @@ Master the basics of LLM APIs and frameworks.
    - Checkpointing
 
 7. **[07_embeddings_basics.py](07_embeddings_basics.py)** - Embeddings
-   - OpenAI embeddings
-   - Google Gemini embeddings
-   - Cohere embeddings
-   - Sentence Transformers (local)
-   - Similarity search
-   - Batch processing
-   - Provider comparison
+   - OpenAI, Gemini, Cohere
+   - Local embeddings (Sentence Transformers)
+   - Similarity search & Batch processing
+
+8. **[08_huggingface_basics.py](08_huggingface_basics.py)** - Hugging Face Ecosystem
+   - Transformers Pipelines (Sentiment, Text Gen)
+   - Inference API (Serverless)
+   - Manual Model Loading
+
+9. **[09_llama_basics.py](09_llama_basics.py)** - Local Llama 3
+   - Llama 3.2 1B/3B Inference
+   - Transformers & Torch integration
+   - Gated model authentication
 
 ## Quick Start
 

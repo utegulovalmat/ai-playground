@@ -86,9 +86,9 @@ python examples/phase4_advanced/01_function_calling.py
 ## 📚 Learning Phases
 
 ### [Phase 1: Foundation](phase1_foundation/) ⭐
-**Master LLM API basics** (7 files)
+**Master LLM API basics** (9 files)
 
-Learn: API authentication, conversations, streaming, function calling, embeddings
+Learn: API authentication, conversations, streaming, function calling, embeddings, Hugging Face, Llama local inference
 
 **Time:** 1-2 weeks
 
