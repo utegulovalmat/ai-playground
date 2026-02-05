@@ -19,9 +19,6 @@ Best Practices:
 - Batch operations for better performance
 """
 
-import os
-from typing import List, Dict
-import numpy as np
 
 
 def qdrant_basics_example():
@@ -284,10 +281,7 @@ def update_and_delete_example(client, collection_name):
     print("\n=== Update & Delete Operations ===")
     
     try:
-        from qdrant_client.models import PointStruct, Filter, FieldCondition, MatchValue
-        from sentence_transformers import SentenceTransformer
-        
-        model = SentenceTransformer('all-MiniLM-L6-v2')
+        from qdrant_client.models import Filter, FieldCondition, MatchValue
         
         # Update payload
         print("\nUpdating payload...")

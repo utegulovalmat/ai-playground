@@ -22,8 +22,6 @@ Best Practices:
 
 import os
 import time
-from typing import List, Dict
-import numpy as np
 
 
 def pinecone_basics_example():

@@ -30,7 +30,6 @@ Best Practices:
 
 import os
 import numpy as np
-from typing import List, Optional
 from sklearn.metrics.pairwise import cosine_similarity
 
 
@@ -319,7 +318,7 @@ def sentence_transformers_example():
         
         import time
         start = time.time()
-        batch_embeddings = model.encode(large_batch, batch_size=32, show_progress_bar=False)
+        model.encode(large_batch, batch_size=32, show_progress_bar=False)
         elapsed = time.time() - start
         
         print(f"✓ Processed {len(large_batch)} sentences in {elapsed:.2f}s")
@@ -426,14 +425,14 @@ def batch_processing_example():
         # Method 1: One at a time (slow)
         print("\nMethod 1: Processing one at a time...")
         start = time.time()
-        embeddings_slow = [model.encode([text])[0] for text in texts[:50]]
+        _ = [model.encode([text])[0] for text in texts[:50]]
         time_slow = time.time() - start
         print(f"  Time for 50 texts: {time_slow:.2f}s")
         
         # Method 2: Batch processing (fast)
         print("\nMethod 2: Batch processing...")
         start = time.time()
-        embeddings_fast = model.encode(texts[:50], batch_size=32, show_progress_bar=False)
+        _ = model.encode(texts[:50], batch_size=32, show_progress_bar=False)
         time_fast = time.time() - start
         print(f"  Time for 50 texts: {time_fast:.2f}s")
         print(f"  Speedup: {time_slow/time_fast:.1f}x faster!")

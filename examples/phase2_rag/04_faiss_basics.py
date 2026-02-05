@@ -20,10 +20,8 @@ Best Practices:
 - Save and load indexes to avoid recomputing
 """
 
-import os
 import numpy as np
 import time
-from typing import List
 
 
 def faiss_basics_example():
@@ -103,9 +101,7 @@ def index_types_example():
     
     try:
         import faiss
-        from sentence_transformers import SentenceTransformer
         
-        model = SentenceTransformer('all-MiniLM-L6-v2')
         dimension = 384
         
         # Generate sample data
@@ -228,7 +224,6 @@ def batch_search_example(index, embeddings):
     print("\n=== Batch Search ===")
     
     try:
-        import faiss
         
         # Single query
         print("\nSingle query search...")
@@ -261,7 +256,6 @@ def range_search_example(index, embeddings):
     print("\n=== Range Search ===")
     
     try:
-        import faiss
         
         query = embeddings[0:1]
         threshold = 50.0  # Distance threshold

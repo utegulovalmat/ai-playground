@@ -516,7 +516,7 @@ def human_in_loop_example():
     print("\nNote: In production, you would pause here for user approval")
     print("before sending. This is a simplified demonstration.\n")
     
-    result = graph.invoke({
+    graph.invoke({
         "messages": [],
         "user_approved": True
     })

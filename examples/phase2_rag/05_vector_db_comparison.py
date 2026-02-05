@@ -16,8 +16,6 @@ Requirements:
 """
 
 import time
-import numpy as np
-from typing import Dict, List
 
 
 def feature_comparison():
@@ -76,7 +74,6 @@ def performance_benchmark():
         print("\n--- ChromaDB ---")
         try:
             import chromadb
-            from chromadb.utils import embedding_functions
             
             client = chromadb.Client()
             collection = client.create_collection("benchmark")
