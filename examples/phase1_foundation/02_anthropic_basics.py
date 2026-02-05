@@ -30,7 +30,7 @@ def simple_completion():
     print("=== Simple Completion ===")
     
     message = client.messages.create(
-        model="claude-3-5-sonnet-20241022",  # Latest Claude model
+        model="claude-3-5-sonnet-20241022",  # Claude model
         max_tokens=1024,  # Maximum tokens in response
         messages=[
             {

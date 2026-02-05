@@ -4,12 +4,13 @@ Master the basics of LLM APIs and frameworks.
 
 ## Files
 
-1. **[01_openai_basics.py](01_openai_basics.py)** - OpenAI API
-   - Simple completions
-   - System messages
-   - Conversations
-   - Streaming
-   - Function calling
+1. **[01_openai_basics.py](01_openai_basics.py)** - OpenAI Responses API
+   - Simple examples with instructions
+   - Detailed behavior guidance
+   - Streaming responses
+   - Temperature control
+   - Multi-turn conversations
+   - API overview
 
 2. **[02_anthropic_basics.py](02_anthropic_basics.py)** - Anthropic Claude
    - Claude API usage

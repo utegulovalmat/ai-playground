@@ -1,9 +1,8 @@
 """
-OpenAI API Examples
-===================
-This example demonstrates how to use OpenAI's APIs:
-- Chat Completions API (classic, flexible)
-- Responses API (newer, simplified)
+OpenAI Responses API Examples
+==============================
+This example demonstrates how to use OpenAI's Responses API - the newest,
+most advanced API that simplifies development with a cleaner interface.
 
 Requirements:
 - openai>=1.0.0
@@ -12,186 +11,28 @@ Requirements:
 Best Practices:
 - Use environment variables for API keys
 - Handle errors gracefully
-- Use async for better performance when making multiple calls
+- Use streaming for real-time responses
 - Specify model versions explicitly
-- Choose the right API for your use case
+- Use instructions to guide model behavior
 """
 
 import os
 from openai import OpenAI
 
 # Initialize the OpenAI client
-# Best practice: Use environment variables for API keys
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
-def simple_completion():
-    """
-    Simple completion example using GPT-4o-mini.
-    This is the most basic way to interact with OpenAI's API.
-    """
-    print("=== Simple Completion ===")
-    
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",  # Specify model explicitly
-        messages=[
-            {"role": "user", "content": "What is the capital of France?"}
-        ],
-        temperature=0.7,  # Controls randomness (0-2)
-        max_tokens=100    # Limit response length
-    )
-    
-    print(response.choices[0].message.content)
-    return response
-
-
-def system_message_example():
-    """
-    Example using system messages to set behavior.
-    System messages help guide the AI's personality and response style.
-    """
-    print("\n=== System Message Example ===")
-    
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant that explains concepts simply."
-            },
-            {
-                "role": "user",
-                "content": "Explain what an API is in one sentence."
-            }
-        ],
-        temperature=0.5
-    )
-    
-    print(response.choices[0].message.content)
-    return response
-
-
-def conversation_example():
-    """
-    Example maintaining conversation history.
-    This shows how to build multi-turn conversations.
-    """
-    print("\n=== Conversation Example ===")
-    
-    # Conversation history
-    messages = [
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "My favorite color is blue."}
-    ]
-    
-    # First turn
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=messages
-    )
-    
-    assistant_message = response.choices[0].message.content
-    print(f"Assistant: {assistant_message}")
-    
-    # Add assistant's response to history
-    messages.append({"role": "assistant", "content": assistant_message})
-    
-    # Second turn - reference previous context
-    messages.append({"role": "user", "content": "What's my favorite color?"})
-    
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=messages
-    )
-    
-    print(f"Assistant: {response.choices[0].message.content}")
-    return response
-
-
-def streaming_example():
-    """
-    Streaming example for real-time responses.
-    Useful for chatbot interfaces where you want to show responses as they're generated.
-    """
-    print("\n=== Streaming Example ===")
-    
-    stream = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "user", "content": "Count from 1 to 5."}
-        ],
-        stream=True  # Enable streaming
-    )
-    
-    print("Streaming response: ", end="")
-    for chunk in stream:
-        if chunk.choices[0].delta.content is not None:
-            print(chunk.choices[0].delta.content, end="", flush=True)
-    print()  # New line after streaming
-
-
-def function_calling_example():
-    """
-    Function calling example (tool use).
-    This allows the model to call predefined functions.
-    """
-    print("\n=== Function Calling Example ===")
-    
-    # Define available functions
-    tools = [
-        {
-            "type": "function",
-            "function": {
-                "name": "get_weather",
-                "description": "Get the current weather for a location",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "location": {
-                            "type": "string",
-                            "description": "The city and state, e.g. San Francisco, CA"
-                        },
-                        "unit": {
-                            "type": "string",
-                            "enum": ["celsius", "fahrenheit"],
-                            "description": "The temperature unit"
-                        }
-                    },
-                    "required": ["location"]
-                }
-            }
-        }
-    ]
-    
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "user", "content": "What's the weather in Paris?"}
-        ],
-        tools=tools,
-        tool_choice="auto"  # Let the model decide when to use tools
-    )
-    
-    # Check if the model wants to call a function
-    if response.choices[0].message.tool_calls:
-        tool_call = response.choices[0].message.tool_calls[0]
-        print(f"Model wants to call: {tool_call.function.name}")
-        print(f"With arguments: {tool_call.function.arguments}")
-    else:
-        print(response.choices[0].message.content)
-
-
 # ============================================================================
-# Responses API Examples (Newer, Simplified API)
+# Responses API Examples
 # ============================================================================
 
-def responses_api_simple():
+def simple_example():
     """
     Simple example using the Responses API.
-    The Responses API is OpenAI's newest, most advanced API that simplifies
-    development by providing a cleaner interface.
+    The Responses API provides a cleaner interface with instructions and input.
     """
-    print("\n=== Responses API - Simple Example ===")
+    print("=== Simple Example ===")
     
     response = client.responses.create(
         model="gpt-4o-mini",
@@ -199,17 +40,17 @@ def responses_api_simple():
         input="What is the capital of France?"
     )
     
-    # Cleaner output - just the text
+    # Clean output - just the text
     print(response.output_text)
     return response
 
 
-def responses_api_with_instructions():
+def detailed_instructions_example():
     """
-    Responses API with detailed instructions.
-    Shows how to guide the model's behavior using the instructions parameter.
+    Example with detailed instructions.
+    Shows how to guide the model's behavior using structured instructions.
     """
-    print("\n=== Responses API - With Instructions ===")
+    print("\n=== Detailed Instructions ===")
     
     response = client.responses.create(
         model="gpt-4o-mini",
@@ -225,12 +66,12 @@ def responses_api_with_instructions():
     return response
 
 
-def responses_api_streaming():
+def streaming_example():
     """
-    Streaming with the Responses API.
-    Get real-time responses as they're generated.
+    Streaming example for real-time responses.
+    Useful for chatbot interfaces where you want to show responses as they're generated.
     """
-    print("\n=== Responses API - Streaming ===")
+    print("\n=== Streaming Example ===")
     
     stream = client.responses.create(
         model="gpt-4o-mini",
@@ -246,39 +87,98 @@ def responses_api_streaming():
     print()  # New line
 
 
-def responses_api_comparison():
+def temperature_example():
     """
-    Comparison between Responses API and Chat Completions API.
-    Shows when to use each.
+    Example showing temperature control.
+    Temperature controls randomness: 0 = deterministic, 2 = very creative.
     """
-    print("\n=== API Comparison ===")
+    print("\n=== Temperature Control ===")
+    
+    # Low temperature (more focused, deterministic)
+    print("\nLow temperature (0.2):")
+    response_low = client.responses.create(
+        model="gpt-4o-mini",
+        instructions="You are a creative writer.",
+        input="Write a one-sentence story about a robot.",
+        temperature=0.2
+    )
+    print(response_low.output_text)
+    
+    # High temperature (more creative, random)
+    print("\nHigh temperature (1.5):")
+    response_high = client.responses.create(
+        model="gpt-4o-mini",
+        instructions="You are a creative writer.",
+        input="Write a one-sentence story about a robot.",
+        temperature=1.5
+    )
+    print(response_high.output_text)
+
+
+def multi_turn_conversation():
+    """
+    Multi-turn conversation example.
+    Shows how to maintain context across multiple interactions.
+    """
+    print("\n=== Multi-turn Conversation ===")
+    
+    # First turn
+    response1 = client.responses.create(
+        model="gpt-4o-mini",
+        instructions="You are a helpful assistant. Remember what the user tells you.",
+        input="My favorite programming language is Python."
+    )
+    print(f"User: My favorite programming language is Python.")
+    print(f"Assistant: {response1.output_text}")
+    
+    # Second turn - reference previous context
+    # Note: In production, you'd maintain conversation history
+    response2 = client.responses.create(
+        model="gpt-4o-mini",
+        instructions="You are a helpful assistant. The user previously said their favorite programming language is Python.",
+        input="What's my favorite programming language?"
+    )
+    print(f"\nUser: What's my favorite programming language?")
+    print(f"Assistant: {response2.output_text}")
+
+
+def api_overview():
+    """
+    Overview of the Responses API.
+    """
+    print("\n=== Responses API Overview ===")
     
     print("""
-┌─────────────────────┬──────────────────────┬─────────────────────────┐
-│ Feature             │ Responses API        │ Chat Completions API    │
-├─────────────────────┼──────────────────────┼─────────────────────────┤
-│ Interface           │ Simplified           │ More flexible           │
-│ Input               │ instructions + input │ messages list           │
-│ Output              │ output_text          │ choices[0].message      │
-│ Best For            │ Simple tasks         │ Complex conversations   │
-│                     │ Fast prototyping     │ Multi-turn chats        │
-│                     │ Clean output         │ Advanced control        │
-│ Built-in Tools      │ Yes (native)         │ Requires setup          │
-│ Orchestration       │ Automatic            │ Manual                  │
-│ Learning Curve      │ Easier               │ Steeper                 │
-└─────────────────────┴──────────────────────┴─────────────────────────┘
+The Responses API is OpenAI's newest, most advanced API that simplifies
+development by providing a cleaner interface.
 
-When to use Responses API:
+Key Features:
+• Simplified interface with 'instructions' and 'input' parameters
+• Clean output via 'output_text' attribute
+• Built-in orchestration and tool integration
+• Automatic handling of complex workflows
+• Easier to learn and use than Chat Completions API
+
+Basic Usage:
+    response = client.responses.create(
+        model="gpt-4o-mini",
+        instructions="You are a helpful assistant.",
+        input="Your question here"
+    )
+    print(response.output_text)
+
+Parameters:
+• model: The model to use (e.g., "gpt-4o-mini", "gpt-4o")
+• instructions: System-level guidance for the model's behavior
+• input: The user's input/question
+• temperature: Controls randomness (0-2, default ~1)
+• stream: Enable streaming responses (True/False)
+
+Best For:
 • Quick prototypes and simple applications
+• Single-turn or simple interactions
 • When you want clean, straightforward output
-• When using built-in tools (web search, file search)
-• For single-turn or simple interactions
-
-When to use Chat Completions API:
-• Complex multi-turn conversations
-• When you need fine-grained control over message history
-• Advanced function calling with custom logic
-• When building sophisticated chatbots
+• Fast development with minimal boilerplate
     """)
 
 
@@ -290,31 +190,27 @@ if __name__ == "__main__":
         exit(1)
     
     print("=" * 70)
-    print("OpenAI API Examples")
+    print("OpenAI Responses API Examples")
     print("=" * 70)
     
     # Run all examples
     try:
-        # Chat Completions API (Classic)
-        print("\n" + "=" * 70)
-        print("CHAT COMPLETIONS API (Classic)")
-        print("=" * 70)
+        simple_example()
+        print("\n" + "=" * 70 + "\n")
         
-        simple_completion()
-        system_message_example()
-        conversation_example()
+        detailed_instructions_example()
+        print("\n" + "=" * 70 + "\n")
+        
         streaming_example()
-        function_calling_example()
+        print("\n" + "=" * 70 + "\n")
         
-        # Responses API (Newer)
-        print("\n" + "=" * 70)
-        print("RESPONSES API (Newer, Simplified)")
-        print("=" * 70)
+        temperature_example()
+        print("\n" + "=" * 70 + "\n")
         
-        responses_api_simple()
-        responses_api_with_instructions()
-        responses_api_streaming()
-        responses_api_comparison()
+        multi_turn_conversation()
+        print("\n" + "=" * 70 + "\n")
+        
+        api_overview()
         
         print("\n" + "=" * 70)
         print("✓ All examples completed!")
