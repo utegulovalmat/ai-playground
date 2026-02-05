@@ -11,6 +11,7 @@ Essential tools and technologies for AI/ML software engineering roles.
 
 ### LLM Frameworks
 - ✅ **LangChain** - Most popular, extensive ecosystem
+- ✅ **LangGraph** - Graph-based workflows, multi-agent systems
 - ✅ **Pydantic AI** - Type-safe, modern Python
 - 🔄 **LlamaIndex** - RAG-focused (add next)
 - 🔄 **Haystack** - Production RAG pipelines
@@ -19,24 +20,42 @@ Essential tools and technologies for AI/ML software engineering roles.
 
 ### Vector Databases (RAG)
 ```bash
-# Choose based on scale:
-uv pip install chromadb          # Local, simple
-uv pip install qdrant-client     # Production-ready
-uv pip install pinecone-client   # Managed service
-uv pip install weaviate-client   # Open source, scalable
+# Choose based on scale and needs:
+uv pip install chromadb          # ✅ Local, simple, great for learning
+uv pip install qdrant-client     # ✅ Production-ready, flexible deployment
+uv pip install faiss-cpu         # ✅ High performance, local, free
+uv pip install pinecone-client   # ✅ Managed cloud service
+uv pip install weaviate-client   # Advanced features, hybrid search
 ```
+
+**Decision Guide:**
+- **Getting started?** → ChromaDB or FAISS
+- **Production app?** → Qdrant or Pinecone
+- **Budget constrained?** → FAISS or Qdrant (self-hosted)
+- **Need hybrid search?** → Weaviate or Qdrant
+- **Maximum performance?** → FAISS with GPU
 
 **When to use:**
 - Building chatbots with custom knowledge
 - Document Q&A systems
 - Semantic search
+- Recommendation systems
 
 ### Embeddings
 ```bash
-uv pip install sentence-transformers  # Local embeddings
-uv pip install cohere                 # Cohere embeddings API
-# OpenAI/Gemini already have embedding APIs
+# Multiple providers available:
+uv pip install sentence-transformers  # ✅ Local, free, no API costs
+uv pip install cohere                 # ✅ Multilingual, high quality
+# OpenAI embeddings (text-embedding-3-small/large)
+# Google Gemini embeddings (text-embedding-004)
 ```
+
+**Provider Comparison:**
+- **Development/Testing:** Sentence Transformers (free, local)
+- **Production (general):** OpenAI text-embedding-3-small
+- **High quality:** OpenAI text-embedding-3-large
+- **Multilingual:** Cohere embed-multilingual-v3.0
+- **Budget conscious:** Google Gemini (free tier) or Sentence Transformers
 
 ### Prompt Engineering
 ```bash
@@ -141,14 +160,18 @@ uv pip install ultralytics       # YOLO models
 ### Phase 1: Foundation (You're here! ✅)
 - [x] LLM APIs (OpenAI, Anthropic, Gemini)
 - [x] LangChain basics
+- [x] LangGraph workflows
 - [x] Pydantic AI
+- [x] Embeddings (multi-provider)
 - [ ] Build a simple chatbot
 
-### Phase 2: RAG & Vector DBs
+### Phase 2: RAG & Vector DBs (In Progress! 🔄)
 ```bash
-uv pip install langchain chromadb sentence-transformers
+uv pip install langchain chromadb sentence-transformers qdrant-client faiss-cpu
 ```
-- [ ] Learn embeddings
+- [x] Learn embeddings (OpenAI, Google, Cohere, local)
+- [x] Vector databases (ChromaDB, Pinecone, Qdrant, FAISS)
+- [x] Vector DB comparison and selection
 - [ ] Build document Q&A system
 - [ ] Implement semantic search
 
@@ -193,17 +216,17 @@ uv pip install langchain openai fastapi react-py chromadb
 ## 📖 Next Steps for You
 
 ### Immediate (This Week)
-1. **Add LlamaIndex** - RAG-focused framework
-   ```bash
-   uv pip install llama-index
-   ```
+1. **✅ Vector Databases** - Completed! ChromaDB, Qdrant, FAISS, Pinecone
+   
+2. **✅ Embeddings** - Completed! Multi-provider examples
 
-2. **Try Vector DB** - Start with ChromaDB
-   ```bash
-   uv pip install chromadb
-   ```
+3. **Build a RAG App** - Combine LangChain + your chosen vector DB
+   - Start with ChromaDB or FAISS (easiest)
+   - Follow the document Q&A system example
 
-3. **Build a RAG App** - Combine LangChain + ChromaDB
+4. **Try LangGraph** - Build a multi-agent workflow
+   - Explore the 7 workflow patterns
+   - Build a simple agent collaboration
 
 ### Short Term (This Month)
 1. **Learn FastAPI** - Build production APIs
