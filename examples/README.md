@@ -12,10 +12,16 @@ examples/
 │   ├── 03_gemini_basics.py
 │   ├── 04_langchain_basics.py
 │   ├── 05_pydantic_ai_basics.py
+│   ├── 06_langgraph_basics.py
+│   ├── 07_embeddings_basics.py
 │   └── README.md
 ├── phase2_rag/            # RAG & Vector DBs
 │   ├── 01_chromadb_basics.py
-│   ├── 02_document_qa_system.py
+│   ├── 02_pinecone_basics.py
+│   ├── 03_qdrant_basics.py
+│   ├── 04_faiss_basics.py
+│   ├── 05_vector_db_comparison.py
+│   ├── 06_document_qa_system.py
 │   └── README.md
 ├── phase3_production/     # Production APIs & Demos
 │   ├── 01_fastapi_rest_api.py
@@ -38,12 +44,12 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 **Phase 1 (Start here!):**
 ```bash
-uv pip install openai anthropic google-genai langchain langchain-google-genai pydantic-ai
+uv pip install openai anthropic google-genai langchain langgraph langchain-google-genai pydantic-ai cohere sentence-transformers scikit-learn
 ```
 
 **Phase 2:**
 ```bash
-uv pip install chromadb sentence-transformers pypdf
+uv pip install chromadb sentence-transformers pypdf pinecone-client qdrant-client faiss-cpu cohere scikit-learn
 ```
 
 **Phase 3:**
@@ -80,16 +86,16 @@ python examples/phase4_advanced/01_function_calling.py
 ## 📚 Learning Phases
 
 ### [Phase 1: Foundation](phase1_foundation/) ⭐
-**Master LLM API basics** (5 files)
+**Master LLM API basics** (7 files)
 
-Learn: API authentication, conversations, streaming, function calling
+Learn: API authentication, conversations, streaming, function calling, embeddings
 
 **Time:** 1-2 weeks
 
 ### [Phase 2: RAG & Vector DBs](phase2_rag/) ⭐⭐
-**Build document Q&A systems** (2 files)
+**Build document Q&A systems** (6 files)
 
-Learn: Embeddings, vector search, RAG, conversation memory
+Learn: Embeddings, vector search, RAG, conversation memory, vector databases
 
 **Time:** 1-2 weeks
 

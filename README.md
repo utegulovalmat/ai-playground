@@ -13,10 +13,16 @@ ai-playground/
 │   │   ├── 03_gemini_basics.py
 │   │   ├── 04_langchain_basics.py
 │   │   ├── 05_pydantic_ai_basics.py
+│   │   ├── 06_langgraph_basics.py
+│   │   ├── 07_embeddings_basics.py
 │   │   └── README.md
 │   ├── phase2_rag/            # ⭐⭐ RAG & Vector DBs
 │   │   ├── 01_chromadb_basics.py
-│   │   ├── 02_document_qa_system.py
+│   │   ├── 02_pinecone_basics.py
+│   │   ├── 03_qdrant_basics.py
+│   │   ├── 04_faiss_basics.py
+│   │   ├── 05_vector_db_comparison.py
+│   │   ├── 06_document_qa_system.py
 │   │   └── README.md
 │   ├── phase3_production/     # ⭐⭐⭐ Production APIs
 │   │   ├── 01_fastapi_rest_api.py
@@ -76,7 +82,7 @@ python examples/phase1_foundation/03_gemini_basics.py
 ## 📚 Learning Path
 
 ### Phase 1: Foundation (1-2 weeks)
-**Master LLM API basics** - 5 examples
+**Master LLM API basics** - 7 examples
 
 Start here! Learn API authentication, conversations, streaming, and function calling.
 
@@ -88,7 +94,7 @@ python 03_gemini_basics.py
 [→ Phase 1 Details](examples/phase1_foundation/)
 
 ### Phase 2: RAG & Vector DBs (1-2 weeks)
-**Build document Q&A systems** - 2 examples
+**Build document Q&A systems** - 6 examples
 
 Learn embeddings, vector search, and retrieval-augmented generation.
 

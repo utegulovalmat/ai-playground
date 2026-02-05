@@ -35,11 +35,27 @@ Master the basics of LLM APIs and frameworks.
    - Validation
    - Dependency injection
 
+6. **[06_langgraph_basics.py](06_langgraph_basics.py)** - LangGraph
+   - Graph-based workflows
+   - Conditional branching
+   - State management
+   - Multi-agent collaboration
+   - Checkpointing
+
+7. **[07_embeddings_basics.py](07_embeddings_basics.py)** - Embeddings
+   - OpenAI embeddings
+   - Google Gemini embeddings
+   - Cohere embeddings
+   - Sentence Transformers (local)
+   - Similarity search
+   - Batch processing
+   - Provider comparison
+
 ## Quick Start
 
 ```bash
 # Install dependencies
-uv pip install openai anthropic google-genai langchain langchain-google-genai pydantic-ai
+uv pip install openai anthropic google-genai langchain langgraph langchain-google-genai pydantic-ai cohere sentence-transformers scikit-learn
 
 # Set API key (choose one)
 export OPENAI_API_KEY='your-key'
