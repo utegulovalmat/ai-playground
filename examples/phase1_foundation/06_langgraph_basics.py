@@ -7,8 +7,8 @@ stateful, multi-actor applications with LLMs.
 Requirements:
 - langgraph>=0.2.0
 - langchain>=1.2.0
-- langchain-google-genai>=4.2.0 (or other provider packages)
-- GEMINI_API_KEY environment variable (or other provider keys)
+- langchain-openai>=0.1.0
+- OPENAI_API_KEY environment variable
 
 Best Practices:
 - Use graphs for complex, stateful workflows
@@ -19,17 +19,17 @@ Best Practices:
 
 import os
 from typing import TypedDict, Annotated, Literal
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langgraph.graph import StateGraph, END, START
 from langgraph.graph.message import add_messages
 from langgraph.checkpoint.memory import MemorySaver
 
 
-# Initialize the model
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.0-flash",
-    google_api_key=os.environ.get("GEMINI_API_KEY"),
+# Initialize the model (using OpenAI for better reliability in this example)
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    api_key=os.environ.get("OPENAI_API_KEY"),
     temperature=0.7
 )
 
@@ -526,9 +526,9 @@ def human_in_loop_example():
 
 if __name__ == "__main__":
     # Check if API key is set
-    if not os.environ.get("GEMINI_API_KEY"):
-        print("Error: GEMINI_API_KEY environment variable not set")
-        print("Set it with: export GEMINI_API_KEY='your-key-here'")
+    if not os.environ.get("OPENAI_API_KEY"):
+        print("Error: OPENAI_API_KEY environment variable not set")
+        print("Set it with: export OPENAI_API_KEY='your-key-here'")
         exit(1)
     
     print("=" * 70)

@@ -154,9 +154,9 @@ def performance_benchmark():
             
             start = time.time()
             for query in query_embeddings:
-                client.search(
+                client.query_points(
                     collection_name="benchmark",
-                    query_vector=query.tolist(),
+                    query=query.tolist(),
                     limit=10
                 )
             query_time = time.time() - start

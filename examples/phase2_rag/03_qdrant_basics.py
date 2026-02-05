@@ -85,11 +85,11 @@ def qdrant_basics_example():
         query_text = "Tell me about vector databases"
         query_vector = model.encode(query_text).tolist()
         
-        search_results = client.search(
+        search_results = client.query_points(
             collection_name=collection_name,
-            query_vector=query_vector,
+            query=query_vector,
             limit=2
-        )
+        ).points
         
         print(f"Query: '{query_text}'")
         print("\nTop matches:")
@@ -188,9 +188,9 @@ def payload_filtering_example(client, collection_name):
         print(f"\nQuery: '{query_text}'")
         print("Filter: category = 'programming'")
         
-        results = client.search(
+        results = client.query_points(
             collection_name=collection_name,
-            query_vector=query_vector,
+            query=query_vector,
             query_filter=Filter(
                 must=[
                     FieldCondition(
@@ -200,7 +200,7 @@ def payload_filtering_example(client, collection_name):
                 ]
             ),
             limit=3
-        )
+        ).points
         
         print("\nFiltered results:")
         for result in results:
